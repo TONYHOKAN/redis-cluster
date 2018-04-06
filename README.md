@@ -1,3 +1,16 @@
+# Forked change
+  add phpRedisAdmin to the docker-compose.yml build stack
+  add volumes to hardcode path for window C:\work\db\
+  force redis using version redis:3.2.11
+  other change see commit log
+  
+After 
+```
+docker-compose up
+```
+
+try access http://localhost:8081 to see if phpRedisAdmin start correctly
+
 # redis-cluster 
 **Redis cluster with Docker Compose** 
 
