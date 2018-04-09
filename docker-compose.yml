@@ -1,21 +1,24 @@
 master:
-  image: redis:3.2.11
+  build: master
   volumes:
-      - C:\work\db\redis_master:/data
+      - C:\work\db\redis_master\data:/data
+      - C:\work\db\redis_master\log:/var/redis/log/
   ports:
       - 6379:6379
 slave:
-  image: redis:3.2.11
-  command: redis-server --slaveof redis-master 6379
+  build: slave
   volumes:
-      - C:\work\db\redis_slave:/data
+      - C:\work\db\redis_slave\data:/data
+      - C:\work\db\redis_slave\log:/var/redis/log/
   links:
     - master:redis-master
 sentinel:
   build: sentinel
   environment:
     - SENTINEL_DOWN_AFTER=5000
-    - SENTINEL_FAILOVER=5000    
+    - SENTINEL_FAILOVER=5000  
+  volumes:
+    - C:\work\db\sentinel\log:/var/redis/log/
   links:
     - master:redis-master
     - slave
